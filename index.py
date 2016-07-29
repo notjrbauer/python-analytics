@@ -1,10 +1,13 @@
 import logging
 import analytics
 import dateutil.parser
+import os
 
 from pprint import pprint
 from datetime import datetime
 from flask import Flask, request, json
+
+PORT = os.environ.get('PORT', 5000)
 
 analytics.write_key = 'i6aoC3CdUjS4BvSOvmJQguLBAlvzt6kG'
 analytics.debug = True
@@ -113,4 +116,4 @@ def group():
         return json.dumps({'error': str(e)})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=4000, debug=True)
+    app.run(host='0.0.0.0', port=PORT, debug=True)
