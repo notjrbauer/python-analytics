@@ -1,13 +1,13 @@
+import os
 import logging
 import analytics
 import dateutil.parser
-import os
 
 from pprint import pprint
 from datetime import datetime
 from flask import Flask, request, json
 
-PORT = os.environ.get('PORT', 5000)
+PORT = os.environ.get('PORT', 4000)
 
 analytics.write_key = 'i6aoC3CdUjS4BvSOvmJQguLBAlvzt6kG'
 analytics.debug = True
@@ -58,6 +58,7 @@ def alias():
 def page():
     try:
         content = request.get_json(silent=True)
+        print(content)
         _userId = content.get('userId')
         _event = content.get('event')
         _category = content.get('category')
@@ -116,4 +117,4 @@ def group():
         return json.dumps({'error': str(e)})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    app.run(host='0.0.0.0', port=int(PORT), debug=True)
